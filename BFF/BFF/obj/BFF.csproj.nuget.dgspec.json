@@ -1,0 +1,320 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj": {}
+  },
+  "projects": {
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj",
+        "projectName": "BFF",
+        "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj",
+        "packagesPath": "/Users/kobebrants/.nuget/packages/",
+        "outputPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kobebrants/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/BL.csproj": {
+                "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/BL.csproj"
+              },
+              "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj": {
+                "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.4/libexec/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/BL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/BL.csproj",
+        "projectName": "BL",
+        "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/BL.csproj",
+        "packagesPath": "/Users/kobebrants/.nuget/packages/",
+        "outputPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kobebrants/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj": {
+                "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.4/libexec/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/Core.csproj",
+        "projectName": "Core",
+        "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/Core.csproj",
+        "packagesPath": "/Users/kobebrants/.nuget/packages/",
+        "outputPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kobebrants/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.4/libexec/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/DAL.csproj",
+        "packagesPath": "/Users/kobebrants/.nuget/packages/",
+        "outputPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/DAL/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kobebrants/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/Core.csproj": {
+                "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Core/Core.csproj"
+              },
+              "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/Domain.csproj": {
+                "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.4/libexec/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/Domain.csproj",
+        "packagesPath": "/Users/kobebrants/.nuget/packages/",
+        "outputPath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/kobebrants/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/opt/homebrew/Cellar/dotnet/8.0.4/libexec/sdk/8.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
