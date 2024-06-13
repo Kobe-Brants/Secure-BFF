@@ -1,0 +1,12 @@
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/bin/Debug/net8.0/Domain.deps.json
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/bin/Debug/net8.0/Domain.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/bin/Debug/net8.0/Domain.pdb
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.AssemblyInfoInputs.cache
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.csproj.CoreCompileInputs.cache
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.sourcelink.json
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/refint/Domain.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/Domain.pdb
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/Domain/obj/Debug/net8.0/ref/Domain.dll

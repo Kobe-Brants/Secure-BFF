@@ -313,3 +313,5 @@
 /Users/kobebrants/Documents/Bench/Secure BFF/SecureTokenService/SecureTokenService/obj/Debug/net8.0/SecureTokenService.pdb
 /Users/kobebrants/Documents/Bench/Secure BFF/SecureTokenService/SecureTokenService/obj/Debug/net8.0/SecureTokenService.genruntimeconfig.cache
 /Users/kobebrants/Documents/Bench/Secure BFF/SecureTokenService/SecureTokenService/obj/Debug/net8.0/ref/SecureTokenService.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/SecureTokenService/SecureTokenService/bin/Debug/net8.0/keys/is-signing-key-AC424D87B3BF7AB81C2C1F0CD13A0BFD.json
+/Users/kobebrants/Documents/Bench/Secure BFF/SecureTokenService/SecureTokenService/obj/Debug/net8.0/SecureTokenService.sourcelink.json

@@ -1,6 +1,9 @@
+using System.Security.Cryptography;
+using System.Text;
 using BFF.Extensions;
 using BL.Services.Session;
 using BL.Services.Session.DTO_s.Responses;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -9,23 +12,27 @@ namespace BFF.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthenticationController: ControllerBase
+public class AuthenticationController(ISessionService sessionService, IConfiguration configuration)
+    : ControllerBase
 {
-    private readonly ISessionService _sessionService;
-    private readonly IConfiguration _configuration;
 
-    public AuthenticationController(ISessionService sessionService, IConfiguration configuration)
+    [HttpGet("sign-in")]
+    public async Task<IActionResult> SignIn(CancellationToken cancellationToken)
     {
-        _sessionService = sessionService;
-        _configuration = configuration;
-    }
-    
-    
-    [HttpGet("signin")]
-    public IActionResult SignIn()
-    {
-        var authorizationUrl = GenerateAuthorizationUrl();
-        return Redirect(authorizationUrl);
+        var session = new Session
+        {
+            Id = Guid.NewGuid().ToString(),
+            ClientId = configuration.GetValue<string>("OAuth:ClientId") ?? string.Empty,
+            AuthorizationEndpoint = configuration.GetValue<string>("OAuth:AuthorizationEndpoint") ?? string.Empty,
+            Scopes = configuration.GetValue<string>("OAuth:Scopes") ?? string.Empty,
+            CodeVerifier = GenerateCodeVerifier()
+        };
+
+        var codeChallenge = GenerateCodeChallenge(session.CodeVerifier);
+        await sessionService.CreateSession(session, cancellationToken);
+
+        var authorizationUrl = $"{session.AuthorizationEndpoint}?response_type=code&client_id={session.ClientId}&redirect_uri=https://localhost:7207/api/authentication/callback&scope={session.Scopes}&state={session.Id}&code_challenge={codeChallenge}&code_challenge_method=S256";
+        return Ok(authorizationUrl);
     }
     
     [HttpGet("callback")]
@@ -36,24 +43,14 @@ public class AuthenticationController: ControllerBase
         // TODO
         return Ok();
     }
-    
-    private string GenerateAuthorizationUrl()
-    {
-        var clientId = _configuration.GetValue<string>("OAuth:ClientId");
-        var redirectUri = _configuration.GetValue<string>("OAuth:RedirectUri");
-        var authorizationEndpoint = _configuration.GetValue<string>("OAuth:AuthorizationEndpoint");
-        var state = GenerateState();
-        
-        return $"{authorizationEndpoint}?response_type=code&client_id={clientId}&redirect_uri={redirectUri}&state={state}";
-    }
 
     private async Task<TokenResponses?> ExchangeCodeForToken(string code)
     {
         var client = new HttpClient();
-        var tokenEndpoint = _configuration.GetValue<string>("OAuth:TokenEndpoint");
-        var clientId = _configuration.GetValue<string>("OAuth:ClientId");
-        var clientSecret = _configuration.GetValue<string>("OAuth:ClientSecret");
-        var redirectUri = _configuration.GetValue<string>("OAuth:RedirectUri");
+        var tokenEndpoint = configuration.GetValue<string>("OAuth:TokenEndpoint");
+        var clientId = configuration.GetValue<string>("OAuth:ClientId");
+        var clientSecret = configuration.GetValue<string>("OAuth:ClientSecret");
+        var redirectUri = configuration.GetValue<string>("OAuth:RedirectUri");
 
         if (clientId is null || redirectUri is null || clientSecret is null)
         {
@@ -80,8 +77,25 @@ public class AuthenticationController: ControllerBase
         return JsonConvert.DeserializeObject<TokenResponses>(content);
     }
     
-    private static string GenerateState()
+    private static string GenerateCodeVerifier()
     {
-        return Guid.NewGuid().ToString();
+        var bytes = new byte[32];
+        RandomNumberGenerator.Fill(bytes);
+        return Base64UrlEncode(bytes);
+    }
+
+    private static string GenerateCodeChallenge(string codeVerifier)
+    {
+        var challengeBytes = SHA256.HashData(Encoding.UTF8.GetBytes(codeVerifier));
+        return Base64UrlEncode(challengeBytes);
+    }
+
+    private static string Base64UrlEncode(byte[] input)
+    {
+        var output = Convert.ToBase64String(input)
+            .Replace('+', '-')
+            .Replace('/', '_')
+            .Replace("=", "");
+        return output;
     }
 }

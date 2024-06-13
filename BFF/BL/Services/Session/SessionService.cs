@@ -16,7 +16,7 @@ public class SessionService : ISessionService
         return _sessionRepository.GetAll();
     }
 
-    public Domain.Session? GetSession(Guid sessionId, CancellationToken cancellationToken)
+    public Domain.Session? GetSession(string sessionId, CancellationToken cancellationToken)
     {
         return _sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
     }
@@ -39,7 +39,7 @@ public class SessionService : ISessionService
         }
     }
 
-    public async Task DeleteSession(Guid sessionId, CancellationToken cancellationToken)
+    public async Task DeleteSession(string sessionId, CancellationToken cancellationToken)
     {
         var session = _sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
 
