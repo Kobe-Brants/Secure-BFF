@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { signInWithBFF } from '../api/authentication.ts';
 
 interface IAuthContext {
   user: any | null;
@@ -27,7 +28,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signIn = async () => {
-    // await signInWithEmailAndPassword(auth, email, password);
+    await signInWithBFF();
   };
 
   return (
