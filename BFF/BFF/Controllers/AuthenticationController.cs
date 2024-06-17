@@ -32,7 +32,7 @@ public class AuthenticationController(ISessionService sessionService, IConfigura
         await sessionService.CreateSession(session, cancellationToken);
 
         var authorizationUrl = $"{session.AuthorizationEndpoint}?response_type=code&client_id={session.ClientId}&redirect_uri=https://localhost:7207/api/authentication/callback&scope={session.Scopes}&state={session.Id}&code_challenge={codeChallenge}&code_challenge_method=S256";
-        return Ok(authorizationUrl);
+        return Redirect(authorizationUrl);
     }
     
     [HttpGet("callback")]

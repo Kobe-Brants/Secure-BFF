@@ -5,7 +5,7 @@ export const signInWithBFF = async () => {
     const redirectUrl = await apiClient<string>('/authentication/sign-in', {
       method: 'GET',
     });
-    window.open(redirectUrl, '_blank');
+    // window.open(redirectUrl, '_blank');
   } catch (error) {
     console.error('Error during sign-in:', error);
   }

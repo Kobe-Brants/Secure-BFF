@@ -12,7 +12,9 @@ public static class ServiceCollectionExtensions
 {
     public static void RegisterDbContexts(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
-        serviceCollection.AddDbContext<DatabaseContext>(options => options.UseSqlite(configuration.GetConnectionString("database")));
+        serviceCollection.AddDbContext<DatabaseContext>(options =>
+            options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
+                sqlOptions => sqlOptions.MigrationsAssembly("BFF")));
     }
 
     public static void RegisterRepositories(this IServiceCollection serviceCollection)

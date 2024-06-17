@@ -22,6 +22,11 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    if (args.Contains("/seed"))
+    {
+        SeedData.EnsureSeedData(app);
+        return;
+    }
     app.UseSwagger();
     app.UseSwaggerUI();
 }
