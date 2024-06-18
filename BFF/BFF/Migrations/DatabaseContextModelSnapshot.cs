@@ -22,6 +22,9 @@ namespace BFF.Migrations
                         .HasColumnType("string")
                         .HasColumnName("id");
 
+                    b.Property<string>("AccessToken")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("AuthorizationEndpoint")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -32,6 +35,9 @@ namespace BFF.Migrations
 
                     b.Property<string>("CodeVerifier")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RefreshToken")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Scopes")

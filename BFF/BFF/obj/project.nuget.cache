@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "79j9A3uwBjmYCT8pU/m2Ks5DRQuwDNKtUtLZS3MEgSPLX2KiVegzrmwIMH6XQN8JIn7ghKaEiOoycbOC/dkMDA==",
+  "dgSpecHash": "SsIpn3CpvnszUbJXvOum6PpfXtgBeaEbTkDYCKbkClcfmxf5Y2sHUiJznsoUiNhC9BPRavlj2gILkdV6b/MFuQ==",
   "success": true,
   "projectFilePath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj",
   "expectedPackageFiles": [
@@ -24,6 +24,7 @@
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.caching.abstractions/8.0.0/microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.caching.memory/8.0.0/microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
+    "/Users/kobebrants/.nuget/packages/microsoft.extensions.configuration.binder/8.0.1/microsoft.extensions.configuration.binder.8.0.1.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.0/microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/microsoft.extensions.dependencymodel/8.0.0/microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",

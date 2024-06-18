@@ -5,7 +5,17 @@ export const signInWithBFF = async () => {
     const redirectUrl = await apiClient<string>('/authentication/sign-in', {
       method: 'GET',
     });
-    // window.open(redirectUrl, '_blank');
+    window.open(redirectUrl, '_self');
+  } catch (error) {
+    console.error('Error during sign-in:', error);
+  }
+};
+
+export const signOutWithBFF = async () => {
+  try {
+    await apiClient<string>('/authentication/sign-out', {
+      method: 'GET',
+    });
   } catch (error) {
     console.error('Error during sign-in:', error);
   }

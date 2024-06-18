@@ -18,7 +18,9 @@ namespace BFF.Migrations
                     ClientId = table.Column<string>(type: "TEXT", nullable: false),
                     AuthorizationEndpoint = table.Column<string>(type: "TEXT", nullable: false),
                     Scopes = table.Column<string>(type: "TEXT", nullable: false),
-                    CodeVerifier = table.Column<string>(type: "TEXT", nullable: false)
+                    CodeVerifier = table.Column<string>(type: "TEXT", nullable: false),
+                    AccessToken = table.Column<string>(type: "TEXT", nullable: true),
+                    RefreshToken = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

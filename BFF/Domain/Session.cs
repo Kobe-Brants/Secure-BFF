@@ -7,4 +7,6 @@ public class Session()
     public required string AuthorizationEndpoint { get; set; }
     public required string Scopes { get; set; }
     public required string CodeVerifier { get; set; }
+    public string? AccessToken { get; set; }
+    public string? RefreshToken { get; set; }
 }
