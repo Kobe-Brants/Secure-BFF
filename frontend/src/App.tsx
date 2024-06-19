@@ -17,7 +17,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ToastContainer autoClose={2000} />
-        <div className="flex flex-col h-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
+        <div className="flex flex-col h-screen w-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
           <Header />
           <main className="mb-auto flex-grow">
             <Routes>

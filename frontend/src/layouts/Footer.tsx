@@ -9,7 +9,7 @@ export default function Footer() {
             href="https://fransagro.be/"
             className="hover:underline text-yellow"
           >
-            Frans Agro
+            Frontend
           </a>
           . Made by{' '}
           <a

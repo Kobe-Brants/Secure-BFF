@@ -54,7 +54,7 @@ export default function Header() {
                 onClick={handleGoHome}
               />
               <div className="px-4 text-xl font-semibold whitespace-nowrap">
-                Frans Agro
+                Frontend
               </div>
             </div>
             <div className="hidden sm:ml-6 sm:block">
