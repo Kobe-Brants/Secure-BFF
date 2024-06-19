@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecureTokenService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4628d171075edf7c53514c4194762a220b4963a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8922979128941c4325746d3945d264623b39c73b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecureTokenService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecureTokenService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

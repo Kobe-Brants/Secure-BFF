@@ -62,7 +62,7 @@ export default function Header() {
                 {user && (
                   <a className="rounded-md px-3 py-2 text-sm font-bold">
                     <span className="text-yellow">{greetUser()}</span>{' '}
-                    {user?.displayName || user?.email}
+                    {user?.given_name}
                   </a>
                 )}
               </div>
@@ -101,7 +101,7 @@ export default function Header() {
                           'block px-4 py-2 text-sm text-gray-700 bg-white'
                         }
                       >
-                        {user.email}
+                        {user.name}
                       </a>
                     </Menu.Item>
                     <Menu.Item>
@@ -131,8 +131,7 @@ export default function Header() {
               as="a"
               className="block rounded-md px-3 py-2 text-base font-medium"
             >
-              <span className="text-yellow">{greetUser()}</span>{' '}
-              {user?.displayName}{' '}
+              <span className="text-yellow">{greetUser()}</span> {user?.name}{' '}
             </Disclosure.Button>
           </div>
         </Disclosure.Panel>

@@ -7,11 +7,8 @@ interface RouteGuardProps {
   isAdminOnly?: boolean;
 }
 
-export default function RouteGuard({
-  component,
-  isAdminOnly = false,
-}: RouteGuardProps) {
-  const { user, loading, isAdmin } = useAuthContext();
+export default function RouteGuard({ component }: RouteGuardProps) {
+  const { user, loading } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,17 +16,11 @@ export default function RouteGuard({
 
     if (!user) {
       navigate('/sign-in');
-    } else if (isAdminOnly && !isAdmin) {
-      navigate('/');
     }
-  }, [loading, user, isAdmin, isAdminOnly, navigate]);
+  }, [loading, user, navigate]);
 
   if (loading) {
     return <div>Loading...</div>;
-  }
-
-  if (isAdminOnly && !isAdmin) {
-    return null;
   }
 
   return <>{component}</>;

@@ -1,15 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../services/contexts/AuthContext.tsx';
-import { UsersIcon } from '@heroicons/react/24/outline';
+import { UserIcon, UsersIcon } from '@heroicons/react/24/outline';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { isAdmin } = useAuthContext();
 
   const paths = [
     {
       name: 'Account',
       path: 'account',
+      icon: <UserIcon className="w-12 text-white" />,
+      isAdminOnly: false,
+    },
+    {
+      name: 'Users',
+      path: 'users',
       icon: <UsersIcon className="w-12 text-white" />,
       isAdminOnly: false,
     },
@@ -23,8 +27,6 @@ export default function Dashboard() {
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {paths.map(path => {
-          if (path.isAdminOnly && !isAdmin) return null;
-
           return (
             <div key={path.name} className="rounded-lg p-4 text-center">
               <button

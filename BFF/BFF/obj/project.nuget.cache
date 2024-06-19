@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SsIpn3CpvnszUbJXvOum6PpfXtgBeaEbTkDYCKbkClcfmxf5Y2sHUiJznsoUiNhC9BPRavlj2gILkdV6b/MFuQ==",
+  "dgSpecHash": "kc4JL1x91CWd/d3Yw3ucydhc3nys+QEaa+iN+kqchIBeAMiEpsUlOqBs5qNhVTtiaflqYBSnHXNYCjtSNdkcAw==",
   "success": true,
   "projectFilePath": "/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/BFF.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "/Users/kobebrants/.nuget/packages/system.composition.hosting/6.0.0/system.composition.hosting.6.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.composition.runtime/6.0.0/system.composition.runtime.6.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.composition.typedparts/6.0.0/system.composition.typedparts.6.0.0.nupkg.sha512",
+    "/Users/kobebrants/.nuget/packages/system.io.hashing/7.0.0/system.io.hashing.7.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.io.pipelines/6.0.3/system.io.pipelines.6.0.3.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.reflection.metadata/6.0.1/system.reflection.metadata.6.0.1.nupkg.sha512",
@@ -58,7 +59,8 @@
     "/Users/kobebrants/.nuget/packages/system.text.encoding.codepages/6.0.0/system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
     "/Users/kobebrants/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
-    "/Users/kobebrants/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512"
+    "/Users/kobebrants/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512",
+    "/Users/kobebrants/.nuget/packages/yarp.reverseproxy/2.1.0/yarp.reverseproxy.2.1.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -10,7 +10,15 @@ function useCookie<T>(cookieName: string): UseCookieReturnType<T> {
   const getCookie = (name: string): T | undefined => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return JSON.parse(parts.pop()!.split(';').shift()!);
+    if (parts.length === 2) {
+      const cookieValue = parts.pop()!.split(';').shift()!;
+      try {
+        return JSON.parse(decodeURIComponent(cookieValue));
+      } catch (error) {
+        console.error(`Error parsing cookie '${name}':`, error);
+        return undefined;
+      }
+    }
     return undefined;
   };
 

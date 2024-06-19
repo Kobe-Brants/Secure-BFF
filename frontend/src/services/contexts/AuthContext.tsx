@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { signInWithBFF, signOutWithBFF } from '../api/authentication.ts';
 import useCookie from '../hooks/useCookie.ts';
-import { User } from '../../types/user.ts';
+import { SessionUser } from '../../types/SessionUser.ts';
 
 interface IAuthContext {
-  user: User | null;
+  user: SessionUser | undefined;
   loading: boolean;
   logout: () => Promise<void>;
   signIn: () => Promise<void>;
@@ -13,18 +13,18 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-  const [session] = useCookie<string>('session_user');
+  const [session] = useCookie<SessionUser | undefined>('session_user');
 
   useEffect(() => {
     if (session) {
-      setUser({ name: 'todo' });
+      setUser(session);
       setLoading(false);
     } else {
       setLoading(false);
     }
-  }, [session]);
+  }, [session, user]);
 
   const logout = async () => {
     await signOutWithBFF();

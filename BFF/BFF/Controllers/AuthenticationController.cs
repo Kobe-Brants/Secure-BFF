@@ -1,13 +1,12 @@
 using BL.Services.Authentication;
-using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BFF.Controllers;
 
-
 [ApiController]
 [Route("api/[controller]")]
-public class AuthenticationController(IAuthenticationService authenticationService, IConfiguration configuration)
+public class AuthenticationController(IAuthenticationService authenticationService)
     : ControllerBase
 {
 
@@ -26,17 +25,24 @@ public class AuthenticationController(IAuthenticationService authenticationServi
         if (frontendRedirectUri is null) return Ok();
         var userInfo = await authenticationService.GetUserInfoOfSession(state, cancellationToken);
         
-        var cookieOptions = new CookieOptions
+        var secureCookieOptions = new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.Strict,
             Expires = DateTimeOffset.UtcNow.AddHours(1)
         };
+        var vulnerableCookieOptions = new CookieOptions
+        {
+            HttpOnly = false,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddHours(1)
+        };
     
-        Response.Cookies.Append("session_id", state, cookieOptions);
-        // Todo return cookie with users information
-        
+        Response.Cookies.Append("session_id", state, secureCookieOptions);
+        Response.Cookies.Append("session_user", JsonConvert.SerializeObject(userInfo), vulnerableCookieOptions);
+
         return Redirect(frontendRedirectUri);
     }
     
@@ -52,6 +58,7 @@ public class AuthenticationController(IAuthenticationService authenticationServi
         if (!isSignedOut) return StatusCode(StatusCodes.Status500InternalServerError, "Failed to sign out");
 
         Response.Cookies.Delete("session_id");
+        Response.Cookies.Delete("session_user");
         return Ok();
     }
 }

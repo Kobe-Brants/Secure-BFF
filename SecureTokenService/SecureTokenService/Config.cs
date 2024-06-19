@@ -17,6 +17,16 @@ public static class Config
             new ApiScope("scope1"),
             new ApiScope("scope2"),
         };
+    
+    public static IEnumerable<ApiResource> ApiResources =>
+        new[]
+        {
+            new ApiResource("myApi")
+            {
+                Scopes = new List<string>{ "scope1", "scope2" },
+                ApiSecrets = new List<Secret>{ new("supersecret".Sha256()) }
+            }
+        };
 
     public static IEnumerable<Client> Clients =>
         new[]

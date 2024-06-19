@@ -1,3 +1,6 @@
 export interface User {
-  name: 'todo';
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 }

@@ -9,6 +9,8 @@ import RouteGuard from './components/RouteGuard.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import NotFound from './pages/NotFound.tsx';
 import SignIn from './pages/account/SignIn.tsx';
+import Details from './pages/account/Details.tsx';
+import UsersList from './pages/users/usersList.tsx';
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,10 +25,17 @@ function App() {
             <Routes>
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="*" element={<NotFound />} />
-
               <Route
                 path="/"
                 element={<RouteGuard component={<Dashboard />} />}
+              />
+              <Route
+                path="/account"
+                element={<RouteGuard component={<Details />} />}
+              />
+              <Route
+                path="/users"
+                element={<RouteGuard component={<UsersList />} />}
               />
             </Routes>
           </main>

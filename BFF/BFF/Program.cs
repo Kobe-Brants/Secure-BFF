@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using BFF;
+using BFF.Middleware;
 using Dal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,12 +12,12 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddReverseProxy().LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 builder.Services.AddSwaggerGen();
 
 builder.Services.RegisterDbContexts(builder.Configuration);
 builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
-
 
 var app = builder.Build();
 
@@ -32,6 +33,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.MapControllers();
+app.MapReverseProxy(proxyPipeline =>
+{
+    proxyPipeline.UseTokenMiddleware();
+});
 
 app.Run();

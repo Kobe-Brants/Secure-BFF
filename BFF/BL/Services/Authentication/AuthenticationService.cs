@@ -3,17 +3,18 @@ using System.Security.Cryptography;
 using System.Text;
 using BL.Services.Authentication.DTO_s.Responses;
 using Core.Interfaces.Repositories;
+using Domain;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace BL.Services.Authentication;
 
-public class AuthenticationService(IConfiguration configuration, IGenericRepository<Domain.Session> sessionRepository)
+public class AuthenticationService(IConfiguration configuration, IGenericRepository<Session> sessionRepository)
     : IAuthenticationService
 {
     public string CreateSignInUrl(CancellationToken cancellationToken)
     {
-        var session = new Domain.Session
+        var session = new Session
         {
             Id = Guid.NewGuid().ToString(),
             ClientId = configuration.GetValue<string>("OAuth:ClientId") ?? string.Empty,
@@ -33,19 +34,18 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
     public async Task<string?> HandleCallback(string code, string state, CancellationToken cancellationToken)
     {
         var frontendRedirectUri = configuration.GetValue<string>("OAuth:FrontendRedirectUrl") ?? string.Empty;
+        
         var existingSession = sessionRepository.Find(x => x.Id == state).FirstOrDefault();
-
         if (existingSession is null) return null;
-
-
+        
         var tokenResponse = await ExchangeCodeForToken(code, existingSession.CodeVerifier);
-
         if (tokenResponse is null) return null;
 
         existingSession.AccessToken = tokenResponse.AccessToken;
         existingSession.RefreshToken = tokenResponse.RefreshToken;
         sessionRepository.Update(existingSession);
         await sessionRepository.Save(cancellationToken);
+
         return frontendRedirectUri;
     }
 
@@ -132,4 +132,27 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
             .Replace("=", "");
         return output;
     }
+
+    // private async Task<bool> EndSession(Session session)
+    // {
+    //     var client = new HttpClient();
+    //     var tokenEndpoint = configuration.GetValue<string>("OAuth:endSessionEndpoint");
+    //     var postLogoutRedirectUri = configuration.GetValue<string>("OAuth:postLogoutRedirectUri");
+    //         
+    //     if (string.IsNullOrEmpty(session.IdToken))
+    //     {
+    //         throw new InvalidOperationException("Session does not contain a valid ID token.");
+    //     }
+    //
+    //     var query = HttpUtility.ParseQueryString(string.Empty);
+    //     query.Set("id_token_hint", session.IdToken);
+    //     query.Set("post_logout_redirect_uri", postLogoutRedirectUri);
+    //
+    //     var state = Guid.NewGuid().ToString();
+    //     query.Set("state", state);
+    //
+    //     var endSessionUrl = $"{tokenEndpoint}?{query}";
+    //
+    //     return true;
+    // }
 }
