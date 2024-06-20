@@ -21,7 +21,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources =>
         new[]
         {
-            new ApiResource("myApi")
+            new ApiResource("api1")
             {
                 Scopes = new List<string>{ "scope1", "scope2" },
                 ApiSecrets = new List<Secret>{ new("supersecret".Sha256()) }

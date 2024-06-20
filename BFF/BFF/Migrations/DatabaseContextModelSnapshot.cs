@@ -37,6 +37,13 @@ namespace BFF.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IdToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RedirectUri")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("RefreshToken")
                         .HasColumnType("TEXT");
 

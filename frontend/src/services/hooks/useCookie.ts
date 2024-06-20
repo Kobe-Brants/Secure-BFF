@@ -38,13 +38,14 @@ function useCookie<T>(cookieName: string): UseCookieReturnType<T> {
     document.cookie = cookieString;
   };
 
-  const deleteCookie = (): void => {
-    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  };
-
   const [cookieValue, setCookieValue] = useState<T | undefined>(
     getCookie(cookieName)
   );
+
+  const deleteCookie = (): void => {
+    setCookieValue(undefined);
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };
 
   const updateCookie = (
     value: T,

@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using BL.Services.Authentication.DTO_s.Responses;
 using Core.Interfaces.Repositories;
 using Domain;
@@ -19,6 +20,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
             Id = Guid.NewGuid().ToString(),
             ClientId = configuration.GetValue<string>("OAuth:ClientId") ?? string.Empty,
             AuthorizationEndpoint = configuration.GetValue<string>("OAuth:AuthorizationEndpoint") ?? string.Empty,
+            RedirectUri = configuration.GetValue<string>("OAuth:RedirectUri") ?? string.Empty,
             Scopes = configuration.GetValue<string>("OAuth:Scopes") ?? string.Empty,
             CodeVerifier = GenerateCodeVerifier()
         };
@@ -28,7 +30,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         sessionRepository.Save(cancellationToken);
 
         return
-            $"{session.AuthorizationEndpoint}?response_type=code&client_id={session.ClientId}&redirect_uri=https://localhost:7207/api/authentication/callback&scope={session.Scopes}&state={session.Id}&code_challenge={codeChallenge}&code_challenge_method=S256";
+            $"{session.AuthorizationEndpoint}?response_type=code&client_id={session.ClientId}&redirect_uri={session.RedirectUri}&scope={session.Scopes}&state={session.Id}&code_challenge={codeChallenge}&code_challenge_method=S256";
     }
 
     public async Task<string?> HandleCallback(string code, string state, CancellationToken cancellationToken)
@@ -41,6 +43,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         var tokenResponse = await ExchangeCodeForToken(code, existingSession.CodeVerifier);
         if (tokenResponse is null) return null;
 
+        existingSession.IdToken = tokenResponse.IdToken;
         existingSession.AccessToken = tokenResponse.AccessToken;
         existingSession.RefreshToken = tokenResponse.RefreshToken;
         sessionRepository.Update(existingSession);
@@ -69,12 +72,14 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
     {
         var session = sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
         if (session is null) return false;
+
+        var successfullyLoggedOud = await EndSession(session);
+
+        if (!successfullyLoggedOud) return successfullyLoggedOud;
         
         sessionRepository.Delete(session);
         await sessionRepository.Save(cancellationToken);
-        
-        // TODO sign out sts
-        return true;
+        return successfullyLoggedOud;
     }
 
     private async Task<TokenResponses?> ExchangeCodeForToken(string code, string codeVerifier)
@@ -133,26 +138,29 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         return output;
     }
 
-    // private async Task<bool> EndSession(Session session)
-    // {
-    //     var client = new HttpClient();
-    //     var tokenEndpoint = configuration.GetValue<string>("OAuth:endSessionEndpoint");
-    //     var postLogoutRedirectUri = configuration.GetValue<string>("OAuth:postLogoutRedirectUri");
-    //         
-    //     if (string.IsNullOrEmpty(session.IdToken))
-    //     {
-    //         throw new InvalidOperationException("Session does not contain a valid ID token.");
-    //     }
-    //
-    //     var query = HttpUtility.ParseQueryString(string.Empty);
-    //     query.Set("id_token_hint", session.IdToken);
-    //     query.Set("post_logout_redirect_uri", postLogoutRedirectUri);
-    //
-    //     var state = Guid.NewGuid().ToString();
-    //     query.Set("state", state);
-    //
-    //     var endSessionUrl = $"{tokenEndpoint}?{query}";
-    //
-    //     return true;
-    // }
+    private async Task<bool> EndSession(Session session)
+    {
+        var client = new HttpClient();
+        var endSessionTokenEndpoint = configuration.GetValue<string>("OAuth:endSessionEndpoint");
+        var postLogoutRedirectUri = configuration.GetValue<string>("OAuth:postLogoutRedirectUri");
+            
+        if (string.IsNullOrEmpty(session.IdToken))
+        {
+            throw new InvalidOperationException("Session does not contain a valid ID token.");
+        }
+        
+        var query = HttpUtility.ParseQueryString(string.Empty);
+        query.Set("id_token_hint", session.IdToken);
+        query.Set("post_logout_redirect_uri", postLogoutRedirectUri);
+        
+        var state = Guid.NewGuid().ToString();
+        query.Set("state", state);
+        
+        var endSessionUrl = $"{endSessionTokenEndpoint}?{query}";
+
+        var request = new HttpRequestMessage(HttpMethod.Get, endSessionUrl);
+        var response = await client.SendAsync(request);
+
+        return response.IsSuccessStatusCode;
+    }
 }

@@ -13,7 +13,7 @@ export const signInWithBFF = async () => {
 
 export const signOutWithBFF = async () => {
   try {
-    await apiClient<string>('/authentication/sign-out', {
+    await apiClient('/authentication/sign-out', {
       method: 'GET',
     });
   } catch (error) {

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BFF.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240617095149_InitialMigration")]
+    [Migration("20240620114708_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -37,6 +37,13 @@ namespace BFF.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CodeVerifier")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("IdToken")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RedirectUri")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

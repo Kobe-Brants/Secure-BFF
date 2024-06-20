@@ -17,8 +17,10 @@ namespace BFF.Migrations
                     id = table.Column<string>(type: "string", nullable: false),
                     ClientId = table.Column<string>(type: "TEXT", nullable: false),
                     AuthorizationEndpoint = table.Column<string>(type: "TEXT", nullable: false),
+                    RedirectUri = table.Column<string>(type: "TEXT", nullable: false),
                     Scopes = table.Column<string>(type: "TEXT", nullable: false),
                     CodeVerifier = table.Column<string>(type: "TEXT", nullable: false),
+                    IdToken = table.Column<string>(type: "TEXT", nullable: true),
                     AccessToken = table.Column<string>(type: "TEXT", nullable: true),
                     RefreshToken = table.Column<string>(type: "TEXT", nullable: true)
                 },

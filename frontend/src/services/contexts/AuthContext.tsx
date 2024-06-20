@@ -15,19 +15,28 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-  const [session] = useCookie<SessionUser | undefined>('session_user');
+  const [session, _, deleteCookie] = useCookie<SessionUser | undefined>(
+    'session_user'
+  );
 
   useEffect(() => {
     if (session) {
       setUser(session);
       setLoading(false);
     } else {
+      setUser(undefined);
       setLoading(false);
     }
   }, [session, user]);
 
   const logout = async () => {
-    await signOutWithBFF();
+    setLoading(true);
+    await signOutWithBFF()
+      .then(() => {
+        deleteCookie();
+        setUser(undefined);
+      })
+      .finally(() => setLoading(false));
   };
 
   const signIn = async () => {

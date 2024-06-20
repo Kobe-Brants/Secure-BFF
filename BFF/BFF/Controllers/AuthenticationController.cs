@@ -6,10 +6,8 @@ namespace BFF.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthenticationController(IAuthenticationService authenticationService)
-    : ControllerBase
+public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
 {
-
     [HttpGet("sign-in")]
     public IActionResult SignIn(CancellationToken cancellationToken)
     {

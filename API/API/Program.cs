@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using BFF.Extensions;
+using API.Extensions;
 
 namespace Api;
 
