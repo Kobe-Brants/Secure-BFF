@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using BFF.Extensions;
 
 namespace Api;
 
@@ -20,8 +21,9 @@ public class Program
         builder.Services.AddAuthentication("Bearer")
             .AddIdentityServerAuthentication("Bearer", options =>
             {
-                options.ApiName = "myApi";
+                options.ApiName = "api1";
                 options.Authority = "https://localhost:5000";
+                options.ApiSecret = "supersecret".Sha256();
             });
 
         // builder.Services.AddAuthorizationBuilder()
