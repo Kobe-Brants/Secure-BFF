@@ -1,4 +1,3 @@
-using Duende.IdentityServer;
 using SecureTokenService.Data;
 using SecureTokenService.Models;
 using Microsoft.AspNetCore.Identity;

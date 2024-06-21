@@ -7,14 +7,14 @@ export default function Footer() {
           © {new Date().getFullYear()}{' '}
           <a
             href="https://fransagro.be/"
-            className="hover:underline text-yellow"
+            className="hover:underline text-green"
           >
             Frontend
           </a>
           . Made by{' '}
           <a
             href="https://www.linkedin.com/in/kobe-brants/"
-            className="hover:underline text-yellow"
+            className="hover:underline text-green"
           >
             Kobe Brants
           </a>

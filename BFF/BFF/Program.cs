@@ -19,6 +19,18 @@ builder.Services.RegisterDbContexts(builder.Configuration);
 builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("corsPolicy",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:4000");
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowCredentials();
+        });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -33,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("corsPolicy");
+app.UseMiddleware<CsrfHeaderMiddleware>();
 
 app.MapControllers();
 app.MapReverseProxy(proxyPipeline =>

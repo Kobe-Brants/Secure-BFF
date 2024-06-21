@@ -1,22 +1,57 @@
-import apiClient from '../../helpers/apiClient.ts';
+import UseApiClient from '../hooks/useApiClient.ts';
+import { useMutation, UseMutationOptions, useQuery } from 'react-query';
+import { $Fetch } from 'ofetch';
+import { QueryOpt } from '../../types/api.ts';
+import { SessionUser } from '../../types/SessionUser.ts';
 
-export const signInWithBFF = async () => {
-  try {
-    const redirectUrl = await apiClient<string>('/authentication/sign-in', {
-      method: 'GET',
-    });
-    window.open(redirectUrl, '_self');
-  } catch (error) {
-    console.error('Error during sign-in:', error);
-  }
+const signInWithBFF = async (apiClient: $Fetch) => {
+  const redirectUrl = await apiClient<string>('/authentication/sign-in', {
+    method: 'GET',
+  });
+  window.open(redirectUrl, '_self');
 };
 
-export const signOutWithBFF = async () => {
-  try {
-    await apiClient('/authentication/sign-out', {
-      method: 'GET',
-    });
-  } catch (error) {
-    console.error('Error during sign-in:', error);
-  }
+export function useMutationSignIn(
+  options?: UseMutationOptions<void, Error> | undefined
+) {
+  const apiClient = UseApiClient();
+
+  return useMutation<void, Error>(() => signInWithBFF(apiClient), options);
+}
+
+const signOutWithBFF = async (apiClient: $Fetch) => {
+  await apiClient('/authentication/sign-out', {
+    method: 'GET',
+  });
+};
+
+export function useMutationSignOut(
+  options?: UseMutationOptions<void, Error> | undefined
+) {
+  const apiClient = UseApiClient();
+
+  return useMutation<void, Error>(() => signOutWithBFF(apiClient), options);
+}
+
+export const authenticationKeys = {
+  me: ['me'],
+};
+
+export const getSessionUser = async (apiClient: $Fetch) => {
+  const result = await apiClient<SessionUser>('/authentication/me', {
+    method: 'GET',
+  });
+  return result || undefined;
+};
+
+export const useQuerySessionUser = (
+  options?: QueryOpt<SessionUser | undefined>
+) => {
+  const apiClient = UseApiClient();
+
+  return useQuery(
+    authenticationKeys.me,
+    () => getSessionUser(apiClient),
+    options
+  );
 };

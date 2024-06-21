@@ -1,13 +1,14 @@
-import apiClient from '../../helpers/apiClient.ts';
 import { useQuery } from 'react-query';
 import { QueryOpt } from '../../types/api.ts';
 import { User } from '../../types/user.ts';
+import { $Fetch } from 'ofetch';
+import UseApiClient from '../hooks/useApiClient.ts';
 
 export const usersKeys = {
   all: ['users'],
 };
 
-export const getUsers = async () => {
+export const getUsers = async (apiClient: $Fetch) => {
   const result = await apiClient<User[]>('/users', {
     method: 'GET',
   });
@@ -15,5 +16,7 @@ export const getUsers = async () => {
 };
 
 export const useQueryUsers = (options?: QueryOpt<User[] | undefined>) => {
-  return useQuery(usersKeys.all, () => getUsers(), options);
+  const apiClient = UseApiClient();
+
+  return useQuery(usersKeys.all, () => getUsers(apiClient), options);
 };

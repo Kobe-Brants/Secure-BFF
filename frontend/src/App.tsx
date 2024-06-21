@@ -1,6 +1,5 @@
 import './assets/styles/App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './layouts/Header.tsx';
@@ -11,15 +10,15 @@ import NotFound from './pages/NotFound.tsx';
 import SignIn from './pages/account/SignIn.tsx';
 import Details from './pages/account/Details.tsx';
 import UsersList from './pages/users/usersList.tsx';
+import { Loading } from './layouts/Loading.tsx';
+import { Suspense } from 'react';
 
 function App() {
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ToastContainer autoClose={2000} />
-        <div className="flex flex-col h-screen w-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
+    <BrowserRouter>
+      <ToastContainer autoClose={2000} />
+      <div className="flex flex-col h-screen w-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
+        <Suspense fallback={<Loading />}>
           <Header />
           <main className="mb-auto flex-grow">
             <Routes>
@@ -40,9 +39,9 @@ function App() {
             </Routes>
           </main>
           <Footer />
-        </div>
-      </BrowserRouter>
-    </QueryClientProvider>
+        </Suspense>
+      </div>
+    </BrowserRouter>
   );
 }
 

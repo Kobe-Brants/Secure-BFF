@@ -30,7 +30,7 @@ export default function Dashboard() {
           return (
             <div key={path.name} className="rounded-lg p-4 text-center">
               <button
-                className="flex items-center justify-center bg-yellow rounded-lg w-24 h-24 mx-auto mb-4 hover:scale-105 transition"
+                className="flex items-center justify-center bg-green rounded-lg w-24 h-24 mx-auto mb-4 hover:scale-105 transition"
                 onClick={() => handleNavigation(path.path)}
               >
                 {path.icon}

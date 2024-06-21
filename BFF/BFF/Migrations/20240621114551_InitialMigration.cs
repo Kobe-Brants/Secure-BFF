@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -22,6 +23,7 @@ namespace BFF.Migrations
                     CodeVerifier = table.Column<string>(type: "TEXT", nullable: false),
                     IdToken = table.Column<string>(type: "TEXT", nullable: true),
                     AccessToken = table.Column<string>(type: "TEXT", nullable: true),
+                    ExpiresAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     RefreshToken = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

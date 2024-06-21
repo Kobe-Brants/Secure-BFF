@@ -10,5 +10,6 @@ public class Session
     public required string CodeVerifier { get; set; }
     public string? IdToken { get; set; }
     public string? AccessToken { get; set; }
+    public DateTime? ExpiresAt { get; set; }
     public string? RefreshToken { get; set; }
 }

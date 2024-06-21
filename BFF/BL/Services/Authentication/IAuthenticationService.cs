@@ -12,4 +12,5 @@ public interface IAuthenticationService
     
     Task<bool> HandleSignOut(string sessionId, CancellationToken cancellationToken);
 
+    Task<bool> HandleRefreshAccessToken(string sessionId, CancellationToken cancellationToken);
 }

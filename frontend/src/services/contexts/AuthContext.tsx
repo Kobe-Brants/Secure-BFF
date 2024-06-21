@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { signInWithBFF, signOutWithBFF } from '../api/authentication.ts';
-import useCookie from '../hooks/useCookie.ts';
 import { SessionUser } from '../../types/SessionUser.ts';
+import {
+  useMutationSignIn,
+  useMutationSignOut,
+  useQuerySessionUser,
+} from '../api/authentication.ts';
 
 interface IAuthContext {
   user: SessionUser | undefined;
@@ -13,27 +16,26 @@ interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const { mutateAsync: signInWithBFF } = useMutationSignIn();
+  const { mutateAsync: signOutWithBFF } = useMutationSignOut();
   const [user, setUser] = useState<SessionUser | undefined>(undefined);
   const [loading, setLoading] = useState(true);
-  const [session, _, deleteCookie] = useCookie<SessionUser | undefined>(
-    'session_user'
-  );
+  const { data: sessionUser } = useQuerySessionUser();
 
   useEffect(() => {
-    if (session) {
-      setUser(session);
+    if (sessionUser) {
+      setUser(sessionUser);
       setLoading(false);
     } else {
       setUser(undefined);
       setLoading(false);
     }
-  }, [session, user]);
+  }, [sessionUser, user]);
 
   const logout = async () => {
     setLoading(true);
     await signOutWithBFF()
       .then(() => {
-        deleteCookie();
         setUser(undefined);
       })
       .finally(() => setLoading(false));

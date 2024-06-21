@@ -61,9 +61,9 @@ export default function Header() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {user && (
-                  <a className="rounded-md px-3 py-2 text-sm font-bold">
-                    <span className="text-yellow">{greetUser()}</span>{' '}
-                    {user?.given_name}
+                  <a className="rounded-md px-3 py-2 text-sm font-bold text-gray-dark">
+                    <span className="text-green">{greetUser()}</span>{' '}
+                    {user.givenName}
                   </a>
                 )}
               </div>
@@ -113,7 +113,7 @@ export default function Header() {
                         <p
                           onClick={handleLogout}
                           className={classNames(
-                            active ? 'bg-yellow' : '',
+                            active ? 'bg-green' : '',
                             'block px-4 py-2 text-sm text-gray-700'
                           )}
                         >
@@ -134,7 +134,7 @@ export default function Header() {
               as="a"
               className="block rounded-md px-3 py-2 text-base font-medium"
             >
-              <span className="text-yellow">{greetUser()}</span> {user?.name}{' '}
+              <span className="text-green">{greetUser()}</span> {user?.name}{' '}
             </Disclosure.Button>
           </div>
         </Disclosure.Panel>

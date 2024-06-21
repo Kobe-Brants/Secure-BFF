@@ -1,6 +1,5 @@
 using BL.Services.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace BFF.Controllers;
 
@@ -21,42 +20,41 @@ public class AuthenticationController(IAuthenticationService authenticationServi
         var frontendRedirectUri = await authenticationService.HandleCallback(code, state, cancellationToken);
 
         if (frontendRedirectUri is null) return Ok();
-        var userInfo = await authenticationService.GetUserInfoOfSession(state, cancellationToken);
-        
         var secureCookieOptions = new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.Strict,
-            Expires = DateTimeOffset.UtcNow.AddHours(1)
-        };
-        var vulnerableCookieOptions = new CookieOptions
-        {
-            HttpOnly = false,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTimeOffset.UtcNow.AddHours(1)
+            Expires = DateTimeOffset.UtcNow.AddHours(0.5)
         };
     
-        Response.Cookies.Append("session_id", state, secureCookieOptions);
-        Response.Cookies.Append("session_user", JsonConvert.SerializeObject(userInfo), vulnerableCookieOptions);
-
+        Response.Cookies.Append("__Host-session-id", state, secureCookieOptions);
         return Redirect(frontendRedirectUri);
+    }
+    
+    [HttpGet("me")]
+    public async Task<IActionResult> Me(CancellationToken cancellationToken)
+    {
+        var sessionId = Request.Cookies["__Host-session-id"];
+        if (sessionId is null) return Unauthorized();
+
+        var userInfo = await authenticationService.GetUserInfoOfSession(sessionId, cancellationToken);
+        return Ok(userInfo);
     }
     
     
     [HttpGet("sign-out")]
     public async Task<IActionResult> SignOut(CancellationToken cancellationToken)
     {
-        var sessionId = Request.Cookies["session_id"];
+        var sessionId = Request.Cookies["__Host-session-id"];
         if (sessionId is null) return Unauthorized();
 
         var isSignedOut = await authenticationService.HandleSignOut(sessionId, cancellationToken);
 
         if (!isSignedOut) return StatusCode(StatusCodes.Status500InternalServerError, "Failed to sign out");
 
-        Response.Cookies.Delete("session_id");
-        Response.Cookies.Delete("session_user");
+        Response.Cookies.Delete("__Host-session-id");
+        Response.Cookies.Delete("__Host-session-user");
         return Ok();
     }
 }

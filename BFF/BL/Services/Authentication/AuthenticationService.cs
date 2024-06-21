@@ -36,16 +36,17 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
     public async Task<string?> HandleCallback(string code, string state, CancellationToken cancellationToken)
     {
         var frontendRedirectUri = configuration.GetValue<string>("OAuth:FrontendRedirectUrl") ?? string.Empty;
-        
+
         var existingSession = sessionRepository.Find(x => x.Id == state).FirstOrDefault();
         if (existingSession is null) return null;
-        
+
         var tokenResponse = await ExchangeCodeForToken(code, existingSession.CodeVerifier);
         if (tokenResponse is null) return null;
 
         existingSession.IdToken = tokenResponse.IdToken;
         existingSession.AccessToken = tokenResponse.AccessToken;
         existingSession.RefreshToken = tokenResponse.RefreshToken;
+        existingSession.ExpiresAt = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
         sessionRepository.Update(existingSession);
         await sessionRepository.Save(cancellationToken);
 
@@ -57,7 +58,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         var client = new HttpClient();
         var userInfoEndpoint = configuration.GetValue<string>("OAuth:UserInfoEndpoint");
         var accessToken = sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault()?.AccessToken;
-        
+
         var request = new HttpRequestMessage(HttpMethod.Get, userInfoEndpoint);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
@@ -73,13 +74,35 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         var session = sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
         if (session is null) return false;
 
-        var successfullyLoggedOud = await EndSession(session);
+        var successfullyLoggedOut = await EndSession(session);
 
-        if (!successfullyLoggedOud) return successfullyLoggedOud;
-        
+        if (!successfullyLoggedOut) return successfullyLoggedOut;
+
         sessionRepository.Delete(session);
         await sessionRepository.Save(cancellationToken);
-        return successfullyLoggedOud;
+        return successfullyLoggedOut;
+    }
+
+    public async Task<bool> HandleRefreshAccessToken(string sessionId, CancellationToken cancellationToken)
+    {
+        var session = sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
+        if (session?.RefreshToken is null) return false;
+
+        var newTokens = await GetNewTokens(session.RefreshToken);
+        if (newTokens is null)
+        {
+            sessionRepository.Delete(session);
+            await sessionRepository.Save(cancellationToken);
+            return false;
+        }
+
+        session.AccessToken = newTokens.AccessToken;
+        session.RefreshToken = newTokens.RefreshToken;
+        session.ExpiresAt = DateTime.UtcNow.AddSeconds(newTokens.ExpiresIn);
+        
+        sessionRepository.Update(session);
+        await sessionRepository.Save(cancellationToken);
+        return true;
     }
 
     private async Task<TokenResponses?> ExchangeCodeForToken(string code, string codeVerifier)
@@ -103,6 +126,37 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
             { "client_id", clientId },
             { "client_secret", clientSecret },
             { "code_verifier", codeVerifier }
+        };
+
+        var request = new HttpRequestMessage(HttpMethod.Post, tokenEndpoint)
+        {
+            Content = new FormUrlEncodedContent(requestBody)
+        };
+
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        return JsonConvert.DeserializeObject<TokenResponses>(content);
+    }
+
+    private async Task<TokenResponses?> GetNewTokens(string refreshToken)
+    {
+        var client = new HttpClient();
+        var tokenEndpoint = configuration.GetValue<string>("OAuth:TokenEndpoint");
+        var clientId = configuration.GetValue<string>("OAuth:ClientId");
+        var clientSecret = configuration.GetValue<string>("OAuth:ClientSecret");
+
+        if (clientId is null || clientSecret is null)
+        {
+            throw new Exception("Configuration value not found");
+        }
+
+        var requestBody = new Dictionary<string, string>
+        {
+            { "grant_type", "refresh_token" },
+            { "refresh_token", refreshToken },
+            { "client_id", clientId },
+            { "client_secret", clientSecret },
         };
 
         var request = new HttpRequestMessage(HttpMethod.Post, tokenEndpoint)
@@ -143,19 +197,19 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         var client = new HttpClient();
         var endSessionTokenEndpoint = configuration.GetValue<string>("OAuth:endSessionEndpoint");
         var postLogoutRedirectUri = configuration.GetValue<string>("OAuth:postLogoutRedirectUri");
-            
+
         if (string.IsNullOrEmpty(session.IdToken))
         {
             throw new InvalidOperationException("Session does not contain a valid ID token.");
         }
-        
+
         var query = HttpUtility.ParseQueryString(string.Empty);
         query.Set("id_token_hint", session.IdToken);
         query.Set("post_logout_redirect_uri", postLogoutRedirectUri);
-        
+
         var state = Guid.NewGuid().ToString();
         query.Set("state", state);
-        
+
         var endSessionUrl = $"{endSessionTokenEndpoint}?{query}";
 
         var request = new HttpRequestMessage(HttpMethod.Get, endSessionUrl);

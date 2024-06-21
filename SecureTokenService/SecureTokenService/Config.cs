@@ -45,7 +45,10 @@ public static class Config
                 PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
 
                 AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "scope2", "offline_access" }
+                AllowedScopes = { "openid", "profile", "scope2", "offline_access" },
+                
+                AccessTokenLifetime = 60 * 5,
+                AbsoluteRefreshTokenLifetime =  60 * 30
             }
         };
 }
