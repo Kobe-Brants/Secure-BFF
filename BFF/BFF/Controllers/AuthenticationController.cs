@@ -36,7 +36,7 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     public async Task<IActionResult> Me(CancellationToken cancellationToken)
     {
         var sessionId = Request.Cookies["__Host-session-id"];
-        if (sessionId is null) return Unauthorized();
+        if (sessionId is null) return NotFound();
 
         var userInfo = await authenticationService.GetUserInfoOfSession(sessionId, cancellationToken);
         return Ok(userInfo);

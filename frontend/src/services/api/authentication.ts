@@ -38,10 +38,14 @@ export const authenticationKeys = {
 };
 
 export const getSessionUser = async (apiClient: $Fetch) => {
-  const result = await apiClient<SessionUser>('/authentication/me', {
-    method: 'GET',
-  });
-  return result || undefined;
+  try {
+    const result = await apiClient<SessionUser>('/authentication/me', {
+      method: 'GET',
+    });
+    return result || undefined;
+  } catch (error) {
+    return undefined;
+  }
 };
 
 export const useQuerySessionUser = (
