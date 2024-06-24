@@ -138,3 +138,10 @@
 /Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.Extensions.Configuration.Binder.dll
 /Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/System.IO.Hashing.dll
 /Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Yarp.ReverseProxy.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.AspNetCore.DataProtection.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.AspNetCore.DataProtection.Abstractions.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/Microsoft.Extensions.Options.dll
+/Users/kobebrants/Documents/Bench/Secure BFF/BFF/BFF/bin/Debug/net8.0/System.Security.Cryptography.Xml.dll

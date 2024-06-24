@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using BL.Services.Authentication.DTO_s.Responses;
+using BL.Services.Encryption;
 using Core.Interfaces.Repositories;
 using Domain;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace BL.Services.Authentication;
 
-public class AuthenticationService(IConfiguration configuration, IGenericRepository<Session> sessionRepository)
+public class AuthenticationService(IConfiguration configuration, IGenericRepository<Session> sessionRepository, ITokenEncryptionService tokenEncryptionService)
     : IAuthenticationService
 {
     public string CreateSignInUrl(CancellationToken cancellationToken)
@@ -45,7 +46,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
 
         existingSession.IdToken = tokenResponse.IdToken;
         existingSession.AccessToken = tokenResponse.AccessToken;
-        existingSession.RefreshToken = tokenResponse.RefreshToken;
+        existingSession.RefreshToken = tokenEncryptionService.Encrypt(tokenResponse.RefreshToken);
         existingSession.ExpiresAt = DateTime.UtcNow.AddSeconds(tokenResponse.ExpiresIn);
         sessionRepository.Update(existingSession);
         await sessionRepository.Save(cancellationToken);
@@ -88,7 +89,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         var session = sessionRepository.Find(x => x.Id == sessionId).FirstOrDefault();
         if (session?.RefreshToken is null) return false;
 
-        var newTokens = await GetNewTokens(session.RefreshToken);
+        var newTokens = await GetNewTokens(tokenEncryptionService.Decrypt(session.RefreshToken));
         if (newTokens is null)
         {
             sessionRepository.Delete(session);
@@ -97,7 +98,7 @@ public class AuthenticationService(IConfiguration configuration, IGenericReposit
         }
 
         session.AccessToken = newTokens.AccessToken;
-        session.RefreshToken = newTokens.RefreshToken;
+        session.RefreshToken = tokenEncryptionService.Encrypt(newTokens.RefreshToken);
         session.ExpiresAt = DateTime.UtcNow.AddSeconds(newTokens.ExpiresIn);
         
         sessionRepository.Update(session);
