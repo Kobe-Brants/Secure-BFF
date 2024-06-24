@@ -36,7 +36,7 @@ public class AuthenticationController(IAuthenticationService authenticationServi
     public async Task<IActionResult> Me(CancellationToken cancellationToken)
     {
         var sessionId = Request.Cookies["__Host-session-id"];
-        if (sessionId is null) return NotFound();
+        if (sessionId is null) return Unauthorized();
 
         var userInfo = await authenticationService.GetUserInfoOfSession(sessionId, cancellationToken);
         return Ok(userInfo);
@@ -53,8 +53,15 @@ public class AuthenticationController(IAuthenticationService authenticationServi
 
         if (!isSignedOut) return StatusCode(StatusCodes.Status500InternalServerError, "Failed to sign out");
 
-        Response.Cookies.Delete("__Host-session-id");
-        Response.Cookies.Delete("__Host-session-user");
+        var secureCookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = DateTimeOffset.UtcNow.AddHours(0.5)
+        };
+        
+        Response.Cookies.Delete("__Host-session-id", secureCookieOptions);
         return Ok();
     }
 }

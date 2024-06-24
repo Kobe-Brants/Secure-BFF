@@ -12,35 +12,38 @@ import Details from './pages/account/Details.tsx';
 import UsersList from './pages/users/usersList.tsx';
 import { Loading } from './layouts/Loading.tsx';
 import { Suspense } from 'react';
+import { AuthContextProvider } from './services/contexts/AuthContext.tsx';
 
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer autoClose={2000} />
-      <div className="flex flex-col h-screen w-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
-        <Suspense fallback={<Loading />}>
-          <Header />
-          <main className="mb-auto flex-grow">
-            <Routes>
-              <Route path="/sign-in" element={<SignIn />} />
-              <Route path="*" element={<NotFound />} />
-              <Route
-                path="/"
-                element={<RouteGuard component={<Dashboard />} />}
-              />
-              <Route
-                path="/account"
-                element={<RouteGuard component={<Details />} />}
-              />
-              <Route
-                path="/users"
-                element={<RouteGuard component={<UsersList />} />}
-              />
-            </Routes>
-          </main>
-          <Footer />
-        </Suspense>
-      </div>
+      <AuthContextProvider>
+        <ToastContainer autoClose={2000} />
+        <div className="flex flex-col h-screen justify-between sm:px-6 lg:px-8 mx-auto max-h-screen">
+          <Suspense fallback={<Loading />}>
+            <Header />
+            <main className="mb-auto flex-grow">
+              <Routes>
+                <Route path="/sign-in" element={<SignIn />} />
+                <Route path="*" element={<NotFound />} />
+                <Route
+                  path="/"
+                  element={<RouteGuard component={<Dashboard />} />}
+                />
+                <Route
+                  path="/account"
+                  element={<RouteGuard component={<Details />} />}
+                />
+                <Route
+                  path="/users"
+                  element={<RouteGuard component={<UsersList />} />}
+                />
+              </Routes>
+            </main>
+            <Footer />
+          </Suspense>
+        </div>
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }

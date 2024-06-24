@@ -1,7 +1,7 @@
 import { createFetch, FetchContext, FetchResponse, ResponseType } from 'ofetch';
 import { useAuthContext } from '../contexts/AuthContext.tsx';
 
-export default function useApiClient() {
+export default function useApiClient({ useOnResponseError = true } = {}) {
   const { logout } = useAuthContext();
 
   return createFetch({
@@ -14,7 +14,7 @@ export default function useApiClient() {
       onResponseError(
         context: FetchContext & { response: FetchResponse<ResponseType> }
       ): Promise<void> | void {
-        if (context.response.status === 401) {
+        if (context.response.status === 401 && useOnResponseError) {
           logout().then();
         }
       },

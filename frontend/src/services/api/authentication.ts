@@ -28,7 +28,7 @@ const signOutWithBFF = async (apiClient: $Fetch) => {
 export function useMutationSignOut(
   options?: UseMutationOptions<void, Error> | undefined
 ) {
-  const apiClient = UseApiClient();
+  const apiClient = UseApiClient({ useOnResponseError: false });
 
   return useMutation<void, Error>(() => signOutWithBFF(apiClient), options);
 }
@@ -51,7 +51,7 @@ export const getSessionUser = async (apiClient: $Fetch) => {
 export const useQuerySessionUser = (
   options?: QueryOpt<SessionUser | undefined>
 ) => {
-  const apiClient = UseApiClient();
+  const apiClient = UseApiClient({ useOnResponseError: false });
 
   return useQuery(
     authenticationKeys.me,

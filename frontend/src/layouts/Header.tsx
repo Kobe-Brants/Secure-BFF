@@ -28,7 +28,7 @@ export default function Header() {
   const handleLogout = () => {
     logout().then(() => {
       toast.success('Signed out successfully');
-      navigate('/sign-in');
+      // navigate('/sign-in');
     });
   };
 
