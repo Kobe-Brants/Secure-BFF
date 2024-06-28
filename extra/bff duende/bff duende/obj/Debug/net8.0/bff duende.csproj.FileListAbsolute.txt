@@ -1,0 +1,51 @@
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende.staticwebassets.runtime.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende.deps.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende.runtimeconfig.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/bff duende.pdb
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Duende.AccessTokenManagement.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Duende.AccessTokenManagement.OpenIdConnect.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Duende.BFF.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Duende.BFF.Yarp.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/IdentityModel.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.Logging.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.AspNetCore.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Extensions.Hosting.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Extensions.Logging.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Formatting.Compact.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Settings.Configuration.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Sinks.Console.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Sinks.Debug.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Serilog.Sinks.File.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/System.IO.Hashing.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/bin/Debug/net8.0/Yarp.ReverseProxy.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.csproj.AssemblyReference.cache
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.AssemblyInfoInputs.cache
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.AssemblyInfo.cs
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.csproj.CoreCompileInputs.cache
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.MvcApplicationPartsAssemblyInfo.cache
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets.build.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets.development.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets/msbuild.bff duende.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets/msbuild.build.bff duende.props
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.bff duende.props
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.bff duende.props
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/staticwebassets.pack.json
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/scopedcss/bundle/bff duende.styles.css
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.csproj.CopyComplete
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/refint/bff duende.dll
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.pdb
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/bff duende.genruntimeconfig.cache
+/Users/kobebrants/Documents/Bench/bff duende/bff duende/obj/Debug/net8.0/ref/bff duende.dll
